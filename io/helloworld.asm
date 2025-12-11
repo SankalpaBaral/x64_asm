@@ -1,21 +1,21 @@
 
 
-section .text
+global _start ; program's entry point
 
-    global _start
-
+section .text ; text section where we write the instructions
 
 _start:
-
-    MOV RAX, 1 
-    MOV RDI, 1 
-    MOV RSI, string 
-    MOV RDX, len 
-    syscall 
+    
+    MOV RAX, 1 ;moves syscall number "1" to the RAX register
+    MOV RDI, 1 ; moves 1 to the RDI register which is for stdout 
+    MOV RSI, message 
+    MOV RDX, msglen 
+    syscall ; performs the syscall 
     MOV RAX, 60 
-    syscall
+    syscall ; performs the syscall 
 
+section .data ; data section where we define our variables
 
-section .data 
-    string: db "Hello World"
-    len: equ $-string
+    message: db "Hello World",10 ;stores the message in the variable and adds "\n" at the end 
+    msglen: equ $-message ; calculates the length of the message 
+
